@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.SlovakiaTeamCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -38,6 +38,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.SlovakiaTeamCode.Robot;
+
+//GIT IS SHIT
 
 
 /**
@@ -53,13 +56,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
+@TeleOp(name="USE THIS DUMBASS", group="Linear Opmode")
 //@Disabled
 public class OpMode_linear extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private Robot robot = new Robot();
+    public Robot robot = new Robot();
 
     @Override
     public void runOpMode() {
@@ -96,6 +99,10 @@ public class OpMode_linear extends LinearOpMode {
                 robot.rightIn.setPower(speed);
                 robot.rightBelt.setPower(speed);
                 robot.leftIn.setPower(speed);
+            }
+            if(gamepad1.a)
+            {
+                robot.allowedToRun = true;
             }
 
 
@@ -146,6 +153,8 @@ public class OpMode_linear extends LinearOpMode {
             robot.rightLift.setPower(Range.clip(-gamepad1.right_stick_y, -0.5, 1.0));
             robot.leftLift.setPower(Range.clip(-gamepad1.right_stick_y, -0.5, 1.0));
 
+
+
             /*if(!robot.touchSensor.geatState())
             {
                 double speed = 0.5;
@@ -181,7 +190,8 @@ public class OpMode_linear extends LinearOpMode {
                 //checks if the block is tilted so that the left side is further away and then accelerates that side.
                 // The change in values is temporary
                 // the added 3 is meant to have this only run at a certain margin of error
-                if (distance1 > distance2 + 0.5) { //todo is it possible to map the distance into speed through range clip?
+                if (distance1 > distance2 + 0.5)
+                {
                     double speed = 0.5;
                     robot.leftIn.setPower(speed + 0.1);
                     robot.rightIn.setPower(speed - 0.1);
@@ -189,7 +199,8 @@ public class OpMode_linear extends LinearOpMode {
 //                    robot.rightBelt.setPower(speed);
                 }
                 //does the same as above but checks the right
-                else if (distance2 > distance1 + 0.5) {
+                else if (distance2 > distance1 + 0.5)
+                {
                     double speed = 0.5;
                     robot.rightIn.setPower(speed + 0.1);
                     robot.leftIn.setPower(speed - 0.1);
@@ -205,14 +216,14 @@ public class OpMode_linear extends LinearOpMode {
     }
 
     // todo should there be a manual override if something happens ???
-    private void engageBelt(double distanceL, double distanceR, boolean cubeStorage){
+    /*private void engageBelt(double distanceL, double distanceR){
         ElapsedTime timeOut = new ElapsedTime();
         double runTime = 0; //todo find optimal amount of time to run belt
         double closeEnough = 0; //todo find the optimal distance to engage belt
         double beltSpeed = -0.5; // todo test different speeds effect
 
         timeOut.reset();
-        while(!cubeStorage) {
+        while(robot.currentStorage < 3) {
             robot.leftBelt.setPower(beltSpeed);
             robot.rightBelt.setPower(beltSpeed);
 
@@ -220,6 +231,35 @@ public class OpMode_linear extends LinearOpMode {
                     distanceR > closeEnough &&
                     timeOut.seconds() >= runTime) {
                 robot.currentStorage += 1;
+                break;
+            }
+        }
+    }*/
+    //todo set appropriate powers in this method
+    private void useIntake(double leftDistance, double rightDistance)
+    {
+        double arrived = 0; //todo set this to be the point where the block has reached the sensor
+        double withinRange = 10; //todo set this to be the point where we want to start spinning
+        double speed = 0.5;
+        double time = 8.0; //theoretical only here to avoid errors
+        double timeToIn = 8.1;  //theoretical only here to avoid errors
+        while(leftDistance > arrived && rightDistance > arrived && leftDistance < withinRange && rightDistance < withinRange && robot.currentStorage < 3 && robot.allowedToRun) //checks distances and number fo cubes for a valid point where you can intake
+        {
+            if(gamepad1.b)
+            {
+                robot.allowedToRun = false;
+                break;
+            }
+            robot.leftIn.setPower(speed); //intakes
+            robot.rightIn.setPower(speed); //intakes
+            if(leftDistance <= arrived && rightDistance <= arrived)
+            {
+                robot.currentStorage += 1; //raises number of blocks stored to accurately track the value
+                while(time < timeToIn) //todo determine appropriate time to move block to position suitable for the next one
+                {
+                    robot.leftBelt.setPower(0.5);
+                    robot.rightBelt.setPower(0.5);
+                }
                 break;
             }
         }
@@ -239,8 +279,8 @@ public class OpMode_linear extends LinearOpMode {
         timer.reset();
         while (opModeIsActive() &&
                 timer.seconds() <= timeOut &&
-                robot.leftLift.isBusy() &&
-                robot.rightLift.isBusy()){
+                robot.leftLift.isBusy() || robot.rightLift.isBusy())
+        {
             telemetry.addData("Current Position","left:(%d) right:(%d)",leftCurrent,rightCurrent);
             telemetry.addData("Target Position", "left:(%d) right:(%d)",leftPosition, rightPosition);
         }

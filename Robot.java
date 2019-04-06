@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;/* Copyright (c) 2017 FIRST. All rights reserved.
+package org.firstinspires.ftc.teamcode.SlovakiaTeamCode;/* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -38,14 +38,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Robot
 {
     /* Public OpMode members. */
-    protected DcMotor  leftDrive   = null;
-    protected DcMotor  rightDrive  = null;
-    protected DcMotor  leftIn      = null;
-    protected DcMotor  rightIn     = null;
-    protected DcMotor  leftBelt    = null;
-    protected DcMotor  rightBelt   = null;
-    protected DcMotor  leftLift    = null;
-    protected DcMotor  rightLift   = null;
+    public DcMotor  leftDrive   = null;
+    public DcMotor  rightDrive  = null;
+    public DcMotor  leftIn      = null;
+    public DcMotor  rightIn     = null;
+    public DcMotor  leftBelt    = null;
+    public DcMotor  rightBelt   = null;
+    public DcMotor  leftLift    = null;
+    public DcMotor  rightLift   = null;
     //protected DistanceSensor distanceSensor1;
     //protected DistanceSensor distanceSensor2;
     protected DigitalChannel touchSensor;
@@ -54,8 +54,9 @@ public class Robot
     private int encoderPerRotation = 560;
     protected int maxLiftPosition = (int) (targetHeight*Math.PI/encoderPerRotation);
     protected int minLiftPosition = 0;
+    public boolean allowedToRun = true;
 
-    protected int currentStorage = 0;
+    public int currentStorage = 0;
     protected final int MAXSTORAGE = 3; // this is in all caps due to final key word conventions
 
     /* local OpMode members. */
