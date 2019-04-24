@@ -150,8 +150,8 @@ public class OpMode_linear extends LinearOpMode {
             robot.rightDrive.setPower(-rightPower);
 
             //s sets the power of the lift motors based on the second joy stick
-            robot.rightLift.setPower(Range.clip(-gamepad1.right_stick_y, -0.5, 1.0));
-            robot.leftLift.setPower(Range.clip(-gamepad1.right_stick_y, -0.5, 1.0));
+            robot.rightLift.setPower(Range.clip(gamepad1.right_stick_y, -0.5, 1.0));
+            robot.leftLift.setPower(Range.clip(gamepad1.right_stick_y, -0.5, 1.0));
 
 
 

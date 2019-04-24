@@ -127,8 +127,8 @@ public class Gustavo_controls extends LinearOpMode {
         //todo check controls
         //region lifting
             //s sets the power of the lift motors based on the second joy stick
-            robot.rightLift.setPower(Range.clip(-gamepad1.right_trigger, 0.0, 1.0));
-            robot.leftLift.setPower(Range.clip(-gamepad1.right_trigger, 0.0, 1.0));
+            robot.rightLift.setPower(Range.clip(gamepad1.right_trigger, 0.0, 1.0));
+            robot.leftLift.setPower(Range.clip(gamepad1.right_trigger, 0.0, 1.0));
         //endregion
 
 
