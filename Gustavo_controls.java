@@ -72,17 +72,17 @@ public class Gustavo_controls extends LinearOpMode {
         // run until the end of the match (driver presses STOP
         while(true) {
 
-        // todo ask what buttons he wants as intake
+        // todo check controls
         // region intake
             // manual control for the belt and intake system
-            if(gamepad1.dpad_up)
+            if(gamepad1.right_bumper)
             {
                 double speed  = -0.5;
                 robot.leftBelt.setPower(-speed);
                 robot.rightIn.setPower(speed);
                 robot.rightBelt.setPower(-speed);
                 robot.leftIn.setPower(speed);
-            }else if(gamepad1.dpad_down){
+            }else if(gamepad1.left_bumper){
                 double speed  = 0.5;
                 robot.leftBelt.setPower(-speed);
                 robot.rightIn.setPower(speed);
@@ -97,7 +97,7 @@ public class Gustavo_controls extends LinearOpMode {
             }
 
         //endregion
-        //todo ask what stick he wants it on
+        //todo check controls
         //region driving
             // sets the power of motors using x and y values from one stick to simplify driving
             double y = - gamepad1.left_stick_y;
@@ -124,11 +124,11 @@ public class Gustavo_controls extends LinearOpMode {
                 robot.rightDrive.setPower(-rightPower);
             }
         //endregion
-        //todo ask what stick he wants lifting on
+        //todo check controls
         //region lifting
             //s sets the power of the lift motors based on the second joy stick
-            robot.rightLift.setPower(Range.clip(-gamepad1.right_stick_y, -0.5, 1.0));
-            robot.leftLift.setPower(Range.clip(-gamepad1.right_stick_y, -0.5, 1.0));
+            robot.rightLift.setPower(Range.clip(-gamepad1.right_trigger, 0.0, 1.0));
+            robot.leftLift.setPower(Range.clip(-gamepad1.right_trigger, 0.0, 1.0));
         //endregion
 
 
