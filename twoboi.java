@@ -71,7 +71,7 @@ public class twoboi extends LinearOpMode {
         // run until the end of the match (driver presses STOP
         while(true) {
 
-        // todo check controls
+            // DONE
         // region intake
             // manual control for the belt and intake system
             if(gamepad2.right_bumper)
@@ -102,7 +102,8 @@ public class twoboi extends LinearOpMode {
                 robot.rightBelt.setPower(speed);
             }
         //endregion
-        // DONE
+
+            // DONE
         //region driving
             // sets the power of motors using x and y values from one stick to simplify driving
             double y = - gamepad1.left_stick_y;
@@ -125,14 +126,15 @@ public class twoboi extends LinearOpMode {
                 robot.leftDrive.setPower(1);
                 robot.rightDrive.setPower(-1);
             }else if (gamepad1.left_stick_button){
-                robot.leftDrive.setPower(-leftPower * 0.6);
-                robot.rightDrive.setPower(-rightPower * 0.6);
+                robot.leftDrive.setPower(-leftPower * 1.6);
+                robot.rightDrive.setPower(-rightPower * 1.6);
             }else{
                 robot.leftDrive.setPower(-leftPower);
                 robot.rightDrive.setPower(-rightPower);
             }
         //endregion
-        //todo add
+
+            //Done
         //region lifting
             //s sets the power of the lift motors based on the second joy stick
             robot.rightLift.setPower(Range.clip(gamepad2.right_stick_y, -0.53, 0.005));
@@ -140,13 +142,13 @@ public class twoboi extends LinearOpMode {
         //endregion
 
 
-            // Show the elapsed game time and wheel power.
+            // Show the elapsed game time and motor powers.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Driving", "left: (%.2f) right (%.2f)", robot.leftDrive.getPower(), robot.rightDrive.getPower());
             telemetry.addData("Intake", "left: (%.2f) right (%.2f)", robot.leftIn.getPower(), robot.rightIn.getPower());
             telemetry.addData("Belt", "left: (%.2f) right (%.2f)", robot.leftBelt.getPower(), robot.rightBelt.getPower());
             telemetry.addData("Lift", "left: (%.2f) right (%.2f)", robot.leftLift.getPower(), robot.rightLift.getPower());
-            telemetry.addData("Triggers", "left: (%.2f) right (%.2f)", gamepad1.left_trigger, gamepad1.right_trigger);
+            telemetry.addData("Triggers", "left: (%.2f) right (%.2f)", gamepad2.left_trigger, gamepad2.right_trigger);
             telemetry.update();
             if(!opModeIsActive()){
                 break;
