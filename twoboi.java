@@ -137,8 +137,13 @@ public class twoboi extends LinearOpMode {
             //Done
         //region lifting
             //s sets the power of the lift motors based on the second joy stick
-            robot.rightLift.setPower(Range.clip(gamepad2.right_stick_y, -0.53, 0.005));
-            robot.leftLift.setPower(Range.clip(gamepad2.right_stick_y, -0.53, 0.005));
+            if (gamepad2.dpad_down){
+                robot.leftLift.setPower(-0.45);
+                robot.rightLift.setPower(-0.45);
+            }else {
+                robot.rightLift.setPower(Range.clip(gamepad2.right_stick_y, -0.53, 0.005));
+                robot.leftLift.setPower(Range.clip(gamepad2.right_stick_y, -0.53, 0.005));
+            }
         //endregion
 
 
