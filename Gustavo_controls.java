@@ -89,11 +89,11 @@ public class Gustavo_controls extends LinearOpMode {
                 robot.leftIn.setPower(speed);
             }
             if(gamepad1.right_trigger != 0){
-                double speed  = Range.clip(gamepad1.right_trigger, -1, 0);
+                double speed  = Range.clip(gamepad1.right_trigger, 0, 1);
                 robot.leftBelt.setPower(speed);
                 robot.rightBelt.setPower(speed);
             }else if(gamepad1.left_trigger != 0){
-                double speed  = -1 * Range.clip(gamepad1.left_trigger, -1, 0);
+                double speed  = -1 * Range.clip(gamepad1.left_trigger, 0, 1);
                 robot.leftBelt.setPower(speed);
                 robot.rightBelt.setPower(speed);
             }else{
@@ -132,8 +132,8 @@ public class Gustavo_controls extends LinearOpMode {
         //todo add
         //region lifting
             //s sets the power of the lift motors based on the second joy stick
-            robot.rightLift.setPower(Range.clip(gamepad1.right_stick_y, -0.5, 0.1));
-            robot.leftLift.setPower(Range.clip(gamepad1.right_stick_y, -0.5, 0.1));
+            robot.rightLift.setPower(Range.clip(gamepad1.right_stick_y, -0.5, 0.005));
+            robot.leftLift.setPower(Range.clip(gamepad1.right_stick_y, -0.5, 0.005));
         //endregion
 
 
